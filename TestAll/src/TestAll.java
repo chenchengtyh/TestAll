@@ -2,14 +2,65 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Scanner;
 
 public class TestAll {
 
 	public static void main(String[] args) {
-		
-		//计算年假
-		CalcuToHoliday();
-		
+
+		// 计算年假
+		// CalcuToHoliday();
+
+		// s=a+aa+aaa+... a与相加个数手动输入
+		Add();
+
+	}
+
+	@SuppressWarnings("resource")
+	private static void Add() {
+		// TODO Auto-generated method stub
+
+		System.out.println("输入相加的值:");
+		Scanner in = new Scanner(System.in);
+		int a = in.nextInt();
+		System.out.println("输入相加个数");
+
+		int count = in.nextInt();
+		int add;
+		add = calcu(a, count);
+		System.out.print(add);
+
+	}
+
+	private static int calcu(int a, int count) {
+		// TODO Auto-generated method stub
+
+		if (count == 0) {
+			System.out.print("=");
+			return 0;
+		} else {
+
+			int y = 0;
+			int k = a;
+			for (int i = 1; i <= count; i++) {
+				int l = i;
+				k = a;
+				while (l > 1) {
+					k = k * 10;
+					l--;
+				}
+				y += k;
+			}
+
+			if (count == 1) {
+				System.out.print(y);
+			} else {
+				System.out.print(y + "+");
+			}
+
+			return y + calcu(a, count - 1);
+		}
+
 	}
 
 	private static void CalcuToHoliday() {
@@ -49,7 +100,7 @@ public class TestAll {
 				can.add(Calendar.YEAR, 1);
 			}
 			System.out.println("天数差：" + days);
-			System.out.print("年假天数:"+((float)days/365*5));
+			System.out.print("年假天数:" + ((float) days / 365 * 5));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
